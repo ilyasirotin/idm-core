@@ -1,0 +1,16 @@
+:80 {
+    root * /app/public
+
+    encode zstd gzip
+    file_server
+
+    php_fastcgi php-fpm:9000 {
+        resolve_root_symlink
+    }
+
+    @phpFile {
+        path *.php*
+    }
+
+    error @phpFile "Not found" 404
+}
