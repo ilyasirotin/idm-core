@@ -20,6 +20,9 @@ services:
     build:
       context: "./docker"
       dockerfile: php-fpm/Dockerfile
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_DEBUG: ${APP_DEBUG}
     volumes:
       - "./:/app:rw,Z"
     depends_on:

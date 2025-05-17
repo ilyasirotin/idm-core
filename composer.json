@@ -1,25 +1,35 @@
 {
-    "name": "threadnull/oauth-server",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "OauthServer\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Ilya Sirotin",
-            "email": "ilyasirotin.we@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^8.4",
-        "slim/slim": "4.*",
-        "slim/psr7": "^1.7",
-        "php-di/slim-bridge": "^3.4",
-        "doctrine/orm": "^3.0",
-        "doctrine/dbal": "^4.0",
-        "symfony/cache": "^7.2"
+  "name": "threadnull/oauth-server",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ilya Sirotin",
+      "email": "ilyasirotin.we@gmail.com"
     }
+  ],
+  "config": {
+    "process-timeout": 0,
+    "sort-packages": true
+  },
+  "autoload": {
+    "files": [
+      "src/env.php"
+    ],
+    "psr-4": {
+      "OauthServer\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.4",
+    "doctrine/dbal": "^4.0",
+    "doctrine/orm": "^3.0",
+    "laminas/laminas-config-aggregator": "^1.18",
+    "middlewares/trailing-slash": "^2.1",
+    "php-di/php-di": "^7.0",
+    "php-di/slim-bridge": "^3.4",
+    "slim/psr7": "^1.7",
+    "slim/slim": "4.*",
+    "symfony/cache": "^7.2"
+  }
 }
