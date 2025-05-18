@@ -4,5 +4,6 @@ composer.lock
 /.vscode
 /.env
 /.DS_Store
-/compose-override.yml
-/var
+/compose.override.yml
+/var/*
+!/var/.gitkeep

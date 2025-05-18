@@ -8,9 +8,6 @@ services:
       - "./:/app:ro,Z"
     ports:
       - "8080:80"
-    networks:
-      - no-internet
-      - internet
     depends_on:
       - php-fpm
   php-fpm:
@@ -27,9 +24,6 @@ services:
       - "./:/app:rw,Z"
     depends_on:
       - db
-    networks:
-      - internet
-      - no-internet
   db:
     image: postgres:17.5-alpine3.21
     container_name: "db"
@@ -39,19 +33,8 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
-    ports:
-      - "54321:5432"
     volumes:
       - "db-data:/var/lib/postgresql/data:rw"
-    networks:
-      - internet
-      - no-internet
 
 volumes:
   db-data:
-
-networks:
-  no-internet:
-    internal: true
-  internet:
-    internal: false

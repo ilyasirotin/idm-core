@@ -1,0 +1,33 @@
+services:
+    app:
+      ports: !reset []
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.http.routers.auth.rule=Host(`auth.docker`)
+        - traefik.http.routers.auth.entryPoints=http
+        - traefik.http.services.auth.loadBalancer.server.port=80
+      networks:
+        - no-internet
+        - traefik-public
+    php-fpm:
+      networks:
+        - internet
+        - no-internet
+    db:
+      ports:
+        - "54321:5432"
+      networks:
+        - internet
+        - no-internet
+
+networks:
+  no-internet:
+    name: no-internet
+    external: true
+  internet:
+    name: internet
+    external: true
+  traefik-public:
+    name: traefik-public
+    external: true
