@@ -1,27 +1,25 @@
 services:
   app:
-    image: caddy:2.10-alpine
+    image: nginx:alpine
     restart: on-failure
     container_name: "app"
     volumes:
-      - "./docker/app/Caddyfile:/etc/caddy/Caddyfile:ro,Z"
-      - "./:/app:ro,Z"
+      - "./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro,z"
+      - "./:/var/www:rw,z"
     ports:
       - "8080:80"
     depends_on:
       - php-fpm
+
   php-fpm:
     restart: always
-    image: "php-fpm"
+    image: "166656354036.dkr.ecr.us-east-1.amazonaws.com/docker-images/php:8.4-fpm-xdebug3.5"
     container_name: "php-fpm"
-    build:
-      context: "./docker"
-      dockerfile: php-fpm/Dockerfile
     environment:
       APP_ENV: ${APP_ENV}
       APP_DEBUG: ${APP_DEBUG}
     volumes:
-      - "./:/app:rw,Z"
+      - "./:/var/www:rw,z"
     depends_on:
       - db
   db:

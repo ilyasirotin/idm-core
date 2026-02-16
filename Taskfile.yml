@@ -1,0 +1,16 @@
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  default:
+    cmds: [ task --list ]
+    silent: true
+
+  up:
+    desc: Start project
+    cmd: docker compose up -d
+
+  down:
+    desc: Stop project
+    cmd: docker compose down --remove-orphans
