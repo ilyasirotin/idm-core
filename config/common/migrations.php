@@ -15,7 +15,7 @@ return [
         $entityManager = $container->get(EntityManagerInterface::class);
 
         $configuration = new Configuration();
-        $configuration->addMigrationsDirectory('OauthServer\Data\Migration', __DIR__ . '/../../src/Data/Migration');
+        $configuration->addMigrationsDirectory('App\Data\Migration', __DIR__ . '/../../src/Data/Migration');
         $configuration->setAllOrNothing(true);
         $configuration->setCheckDatabasePlatform(false);
 

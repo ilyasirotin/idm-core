@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace OauthServer\Http\Action;
+namespace App\Http\Action;
 
-use OauthServer\Http\Response\JsonResponse;
+use App\Http\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

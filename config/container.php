@@ -5,7 +5,7 @@ declare(strict_types=1);
 use DI\ContainerBuilder;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
-use function OauthServer\env;
+use function App\env;
 
 $appEnv = env('APP_ENV', 'prod');
 
@@ -14,7 +14,7 @@ $paths = [
     sprintf('%s/%s/*.php', __DIR__, $appEnv),
 ];
 
-$aggregator = new ConfigAggregator(array_map(function ($path) {
+$aggregator = new ConfigAggregator(array_map(static function ($path) {
     return new PhpFileProvider($path);
 }, $paths));
 

@@ -1,11 +1,11 @@
 {
-  "name": "threadnull/oauth-server",
+  "name": "threadnull/idm-core",
   "type": "project",
   "license": "MIT",
   "authors": [
     {
       "name": "Ilya Sirotin",
-      "email": "ilyasirotin.we@gmail.com"
+      "email": "me@threadnull.com"
     }
   ],
   "config": {
@@ -17,7 +17,7 @@
       "src/env.php"
     ],
     "psr-4": {
-      "OauthServer\\": "src/"
+      "App\\": "src/"
     }
   },
   "require": {

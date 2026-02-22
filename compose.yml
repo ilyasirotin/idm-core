@@ -1,8 +1,8 @@
 services:
-  app:
+  nginx:
     image: nginx:alpine
     restart: on-failure
-    container_name: "app"
+    container_name: "nginx"
     volumes:
       - "./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro,z"
       - "./:/var/www:rw,z"
@@ -17,16 +17,19 @@ services:
     container_name: "php-fpm"
     environment:
       DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
       APP_ENV: ${APP_ENV}
       APP_DEBUG: ${APP_DEBUG}
     volumes:
       - "./:/var/www:rw,z"
     depends_on:
-      - db
+      - postgres
 
-  db:
+  postgres:
     image: postgres:18.2-alpine3.22
-    container_name: "db"
+    container_name: "postgres"
     restart: always
     shm_size: 128mb
     environment:
@@ -34,14 +37,14 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - "db-data:/var/lib/postgresql/data:rw"
+      - "postgres-data:/var/lib/postgresql/data:rw"
     ports:
       - "5432:5432"
 
-  php-cli:
-    build:
-      context: docker
-      dockerfile: php-cli/Dockerfile
+  composer:
+    image: composer:2.9.5
+    container_name: "composer"
+    user: "${UID}:${GID}"
     environment:
       DB_HOST: ${DB_HOST}
       DB_USER: ${DB_USER}
@@ -50,7 +53,9 @@ services:
       APP_ENV: ${APP_ENV}
       APP_DEBUG: ${APP_DEBUG}
     volumes:
-      - "./:/var/www:rw,z"
+      - "./:/app:rw,z"
+    profiles:
+      - ignore
 
 volumes:
-  db-data:
+  postgres-data:

@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@picocss/pico": "^2.1.1"
+  },
+  "scripts": {
+    "build:css": "sass assets/scss/index.scss public/css/index.css --style compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}

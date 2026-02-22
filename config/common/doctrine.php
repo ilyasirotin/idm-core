@@ -15,7 +15,7 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-use function OauthServer\env;
+use function App\env;
 
 return [
     EntityManagerInterface::class => static function (ContainerInterface $container): EntityManagerInterface {

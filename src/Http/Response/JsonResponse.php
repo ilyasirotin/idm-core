@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OauthServer\Http\Response;
+namespace App\Http\Response;
 
 use JsonException;
 use Slim\Psr7\Factory\StreamFactory;

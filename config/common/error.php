@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware;
-use function OauthServer\env;
+use function App\env;
 
 return [
     ErrorMiddleware::class => static function (ContainerInterface $container): ErrorMiddleware {

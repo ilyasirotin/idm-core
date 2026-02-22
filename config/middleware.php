@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Middlewares\TrailingSlash;
-use OauthServer\Http\Middleware\ClearEmptyInput;
-use OauthServer\Http\Middleware\Cors;
+use App\Http\Middleware\ClearEmptyInput;
+use App\Http\Middleware\Cors;
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 
