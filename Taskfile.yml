@@ -14,3 +14,7 @@ tasks:
   down:
     desc: Stop project
     cmd: docker compose down --remove-orphans
+
+  cli:
+    desc: Run php cli
+    cmd: docker compose run --rm php-cli bash

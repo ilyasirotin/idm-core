@@ -16,14 +16,16 @@ services:
     image: "166656354036.dkr.ecr.us-east-1.amazonaws.com/docker-images/php:8.4-fpm-xdebug3.5"
     container_name: "php-fpm"
     environment:
+      DB_HOST: ${DB_HOST}
       APP_ENV: ${APP_ENV}
       APP_DEBUG: ${APP_DEBUG}
     volumes:
       - "./:/var/www:rw,z"
     depends_on:
       - db
+
   db:
-    image: postgres:17.5-alpine3.21
+    image: postgres:18.2-alpine3.22
     container_name: "db"
     restart: always
     shm_size: 128mb
@@ -33,6 +35,22 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - "db-data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+
+  php-cli:
+    build:
+      context: docker
+      dockerfile: php-cli/Dockerfile
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      APP_ENV: ${APP_ENV}
+      APP_DEBUG: ${APP_DEBUG}
+    volumes:
+      - "./:/var/www:rw,z"
 
 volumes:
   db-data:
