@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Http\Action\Home;
+use App\Controller\Index;
 use Slim\App;
 
 return static function (App $app): void {
-    $app->get('/', Home::class);
+    $app->get('/', Index::class);
 };
