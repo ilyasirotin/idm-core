@@ -22,6 +22,7 @@
   },
   "require": {
     "php": "^8.4",
+    "doctrine/collections": "^2.6",
     "doctrine/dbal": "^4.0",
     "doctrine/migrations": "^3.9",
     "doctrine/orm": "^3.0",

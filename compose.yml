@@ -10,6 +10,8 @@ services:
       - "8080:80"
     depends_on:
       - php-fpm
+    networks:
+      - no-internet
 
   php-fpm:
     restart: always
@@ -26,6 +28,9 @@ services:
       - "./:/var/www:rw,z"
     depends_on:
       - postgres
+    networks:
+      - no-internet
+      - internet
 
   postgres:
     image: postgres:18.2-alpine3.22
@@ -40,6 +45,9 @@ services:
       - "postgres-data:/var/lib/postgresql/data:rw"
     ports:
       - "5432:5432"
+    networks:
+      - no-internet
+      - internet
 
   composer:
     image: composer:2.9.5
@@ -56,6 +64,16 @@ services:
       - "./:/app:rw,z"
     profiles:
       - ignore
+    networks:
+      - no-internet
+      - internet
 
 volumes:
   postgres-data:
+
+networks:
+  no-internet:
+    internal: true
+    driver: bridge
+  internet:
+    driver: bridge
